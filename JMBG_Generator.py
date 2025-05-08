@@ -19,7 +19,7 @@ Label(prozor, text = "Name").pack(pady='10', anchor='w')
 Label(prozor, text = "Lastname").pack(pady='10', anchor='w')
 Label(prozor, text="JMBG").pack(pady = '10', anchor = 'w')
 
-
+#komentar koji treba da commitujem na git
 
 
 
