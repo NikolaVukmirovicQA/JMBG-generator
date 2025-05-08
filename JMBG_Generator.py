@@ -1,6 +1,7 @@
 from tkinter import *
 import random
 
+#verzija 1.2 vezba git-a
 def random_jmbg():
     dan = random.randint(1, 31)
     mesec = random.randint(1, 12)
