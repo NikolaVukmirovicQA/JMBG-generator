@@ -1,7 +1,7 @@
 from tkinter import *
 import random
 
-#verzija 1.2 vezba git-a
+
 def random_jmbg():
     dan = random.randint(1, 31)
     mesec = random.randint(1, 12)
@@ -20,7 +20,8 @@ Label(prozor, text = "Name").pack(pady='10', anchor='w')
 Label(prozor, text = "Lastname").pack(pady='10', anchor='w')
 Label(prozor, text="JMBG").pack(pady = '10', anchor = 'w')
 
-#komentar koji treba da commitujem na git
+
+
 
 
 
