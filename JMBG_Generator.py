@@ -2,7 +2,7 @@ from tkinter import *
 import random
 import csv
 
-# Učitaj imena i prezimena iz CSV
+
 osobe = []
 with open('imena_prezimena.csv', 'r', encoding='utf-8') as fajl:
     fajl.readline()  # preskoči header
@@ -13,10 +13,12 @@ with open('imena_prezimena.csv', 'r', encoding='utf-8') as fajl:
             prezime = podaci[1]
             osobe.append((ime, prezime))
 
-# Lista gradova (za mesto rođenja)
+
 mesta = ["Beograd", "Novi Sad", "Niš", "Kragujevac", "Subotica", "Zrenjanin", "Čačak", "Valjevo"]
 
-# Glavna funkcija za generisanje svih podataka
+ime_roditelja = ['Zoran', 'Dragan', 'Bojana', 'Milena', 'Dragica', 'Milun', 'Milutin', 'Dragutin']
+
+
 def generisi_osobu():
     try:
         ime, prezime = random.choice(osobe)
@@ -36,6 +38,11 @@ def generisi_osobu():
         # Mesto rođenja
         mesto = random.choice(mesta)
         mesto_rodjenja_label.config(text=f"Mesto rođenja: {mesto}")
+
+        #Ime roditelja
+        # Ime roditelja
+        roditelj = random.choice(ime_roditelja)
+        ime_roditelja_label.config(text=f"Ime roditelja: {roditelj}")
 
         # Region (trocifreno)
         region = 70
@@ -59,13 +66,15 @@ def generisi_osobu():
             k = 0
 
         jmbg = jmbg12 + str(k)
-        jmbg_label.config(text=f"JMBG: {jmbg}")
+        jmbg_label.config(state='normal')
+        jmbg_label.delete(0, END)
+        jmbg_label.insert(0, jmbg)
+        jmbg_label.config(state='readonly')
 
     except Exception as e:
         jmbg_label.config(text="Greška pri generisanju JMBG")
         print(f"[GREŠKA] {e}")
 
-# GUI deo
 prozor = Tk()
 prozor.title("Random JMBG generator")
 prozor.geometry("800x400")
@@ -91,7 +100,14 @@ ime_roditelja_label.pack(pady=5, anchor='w')
 pol_label = Label(prozor, text="Pol: ")
 pol_label.pack(pady=5, anchor='w')
 
-jmbg_label = Label(prozor, text="JMBG: ")
+#jmbg_label = Label(prozor, text="JMBG: ")
+#jmbg_label.pack(pady=5, anchor='w')
+
+jmbg_naslov = Label(prozor, text="JMBG:", font=("Arial", 12, "bold"))
+jmbg_naslov.pack(pady=(10, 0), anchor='w')
+
+jmbg_label = Entry(prozor, width=30, font=("Arial", 14), state='readonly', readonlybackground='white')
 jmbg_label.pack(pady=5, anchor='w')
+
 
 prozor.mainloop()
