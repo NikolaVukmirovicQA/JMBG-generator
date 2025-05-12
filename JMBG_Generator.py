@@ -5,25 +5,24 @@ import csv
 
 osobe = []
 with open('imena_prezimena.csv', 'r', encoding='utf-8') as fajl:
-    fajl.readline()  # preskoči header
+    fajl.readline()  
     for red in fajl:
         podaci = red.strip().split(',')
-        if len(podaci) == 2:
+        if len(podaci) == 3:
             ime = podaci[0]
             prezime = podaci[1]
-            osobe.append((ime, prezime))
+            pol = podaci[2].strip().lower()
+            osobe.append((ime, prezime, pol))
 
-
-mesta = ["Beograd", "Novi Sad", "Niš", "Kragujevac", "Subotica", "Zrenjanin", "Čačak", "Valjevo"]
-
-ime_roditelja = ['Zoran', 'Dragan', 'Bojana', 'Milena', 'Dragica', 'Milun', 'Milutin', 'Dragutin']
-
+mesta = ["Beograd", "Novi Sad", "Niš", "Kragujevac", "Subotica", "Zrenjanin", "Čačak", "Valjevo", "Kraljevo", "Šabac", "Aleksinac", "Sremski Karlovci", "Sombor", "Čačak"]
+ime_roditelja = ['Zoran', 'Dragan', 'Bojana', 'Milena', 'Dragica', 'Milun', 'Milutin', 'Dragutin', 'Stojan', 'Bojan', 'Miloš', 'Dejan', 'Borislav', 'Jovan', 'Stanoje']
 
 def generisi_osobu():
-    try:
-        ime, prezime = random.choice(osobe)
+    
+        ime, prezime, pol = random.choice(osobe)
         ime_label.config(text=f"Ime: {ime}")
         prezime_label.config(text=f"Prezime: {prezime}")
+        pol_label.config(text=f"Pol: {pol}")
 
         # Datum rođenja
         dan = random.randint(1, 28)
@@ -31,15 +30,10 @@ def generisi_osobu():
         godina = random.randint(1950, 2005)
         datum_rodjenja_label.config(text=f"Datum rođenja: {dan:02d}.{mesec:02d}.{godina}.")
 
-        # Pol
-        pol = random.choice(['muški', 'ženski'])
-        pol_label.config(text=f"Pol: {pol}")
-
         # Mesto rođenja
         mesto = random.choice(mesta)
         mesto_rodjenja_label.config(text=f"Mesto rođenja: {mesto}")
 
-        #Ime roditelja
         # Ime roditelja
         roditelj = random.choice(ime_roditelja)
         ime_roditelja_label.config(text=f"Ime roditelja: {roditelj}")
@@ -71,10 +65,8 @@ def generisi_osobu():
         jmbg_label.insert(0, jmbg)
         jmbg_label.config(state='readonly')
 
-    except Exception as e:
-        jmbg_label.config(text="Greška pri generisanju JMBG")
-        print(f"[GREŠKA] {e}")
 
+# GUI deo
 prozor = Tk()
 prozor.title("Random JMBG generator")
 prozor.geometry("800x400")
@@ -100,14 +92,10 @@ ime_roditelja_label.pack(pady=5, anchor='w')
 pol_label = Label(prozor, text="Pol: ")
 pol_label.pack(pady=5, anchor='w')
 
-#jmbg_label = Label(prozor, text="JMBG: ")
-#jmbg_label.pack(pady=5, anchor='w')
-
 jmbg_naslov = Label(prozor, text="JMBG:", font=("Arial", 12, "bold"))
 jmbg_naslov.pack(pady=(10, 0), anchor='w')
 
 jmbg_label = Entry(prozor, width=30, font=("Arial", 14), state='readonly', readonlybackground='white')
 jmbg_label.pack(pady=5, anchor='w')
-
 
 prozor.mainloop()
